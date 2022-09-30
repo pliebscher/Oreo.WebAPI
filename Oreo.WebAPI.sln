@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32901.82
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oreo.WebAPI.Utils", "Oreo.WebAPI.Utils\Oreo.WebAPI.Utils.csproj", "{A3800132-C3C1-4004-BE94-79D6A668EF26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3800132-C3C1-4004-BE94-79D6A668EF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3800132-C3C1-4004-BE94-79D6A668EF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3800132-C3C1-4004-BE94-79D6A668EF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3800132-C3C1-4004-BE94-79D6A668EF26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {922A30D8-6A2F-48E4-86C4-0C07EE1E53E6}
+	EndGlobalSection
+EndGlobal
