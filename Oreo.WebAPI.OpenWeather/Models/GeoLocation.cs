@@ -6,6 +6,6 @@
         public string State { get; set; }
         public string Country { get; set; }
         public string Lat { get; set; }
-        public string Log { get; set; }
+        public string Lon { get; set; }
     }
 }

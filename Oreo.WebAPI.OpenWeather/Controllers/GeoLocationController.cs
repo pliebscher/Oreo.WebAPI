@@ -29,14 +29,16 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
         /// <param name="Location"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<GeoLocation> Get(string Location)
+        public async Task<GeoLocation[]> Get(string Location)
         {
+
+            // TODO: Add city, state, country to params and update request query...
 
             RestClient client = new RestClient("http://api.openweathermap.org/geo/1.0");
             RestRequest request = new RestRequest("direct?q=piedmont,ca,us&limit=1&appid=e850980c6457ad9e1f2fc72792dd0eca");
             RestResponse response = await client.GetAsync(request);
 
-            GeoLocation locationResonse = JsonConvert.DeserializeObject<GeoLocation>(response.Content);
+            GeoLocation[] locationResonse = JsonConvert.DeserializeObject<GeoLocation[]>(response.Content);
 
             return locationResonse;
         }        
