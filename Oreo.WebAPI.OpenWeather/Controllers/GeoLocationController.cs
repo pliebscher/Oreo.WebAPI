@@ -16,13 +16,13 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
     [ApiController]
     public class GeoLocationController : ControllerBase
     {
-        private readonly ILogger<GeoLocationController> _log;
+        private readonly ILogger<GeoLocationController> _logger;
 
         private string _apiKey = "e850980c6457ad9e1f2fc72792dd0eca"; // TODO: Inject
 
         public GeoLocationController(ILogger<GeoLocationController> logger)
         {
-            _log = logger;
+            _logger = logger;
         }
 
         /// <summary>
@@ -47,15 +47,15 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
 
             try
             {
-                RestClient client = new RestClient("http://api.openweathermap.org/geo/1.0");
-                RestRequest request = new RestRequest($"direct?q={location.City},{location.State},{location.Country}&appid={_apiKey}");
+                RestClient client = new RestClient("http://api.openweathermap.org/geo/1.0/direct");
+                RestRequest request = new RestRequest($"?q={location.City},{location.State},{location.Country}&appid={_apiKey}");
 
                 RestResponse response = await client.GetAsync(request);
                 locationResonse = JsonConvert.DeserializeObject<GeoLocation[]>(response.Content);
             }
             catch (Exception e) 
             {
-                _log.LogError(e,"Error getting location.");
+                _logger.LogError(e,"Error getting location.");
                 throw;
             }
 
