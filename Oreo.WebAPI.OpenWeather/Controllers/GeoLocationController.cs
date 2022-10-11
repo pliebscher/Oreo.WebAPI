@@ -18,27 +18,36 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
     {
         private readonly ILogger<GeoLocationController> _log;
 
+        private string _apiKey = "e850980c6457ad9e1f2fc72792dd0eca"; // TODO: Inject
+
         public GeoLocationController(ILogger<GeoLocationController> logger)
         {
             _log = logger;
         }
 
         /// <summary>
-        /// GET: api/GeoLocation
+        /// /api/geolocation?city=piedmont&state=ca&country=us
         /// </summary>
-        /// <param name="Location"></param>
+        /// <param name="location"></param>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<GeoLocation[]> Get(string Location)
+        [HttpGet]        
+        public async Task<IEnumerable<GeoLocation>> Get([FromQuery] GeoLocationRequest location)
         {
+            GeoLocation[] locationResonse;
 
-            // TODO: Add city, state, country to params and update request query...
+            try
+            {
+                RestClient client = new RestClient("http://api.openweathermap.org/geo/1.0");
+                RestRequest request = new RestRequest($"direct?q={location.City},{location.State},{location.Country}&appid={_apiKey}");
 
-            RestClient client = new RestClient("http://api.openweathermap.org/geo/1.0");
-            RestRequest request = new RestRequest("direct?q=piedmont,ca,us&limit=1&appid=e850980c6457ad9e1f2fc72792dd0eca");
-            RestResponse response = await client.GetAsync(request);
-
-            GeoLocation[] locationResonse = JsonConvert.DeserializeObject<GeoLocation[]>(response.Content);
+                RestResponse response = await client.GetAsync(request);
+                locationResonse = JsonConvert.DeserializeObject<GeoLocation[]>(response.Content);
+            }
+            catch (Exception e) 
+            {
+                _log.LogError(e,"Error getting location.");
+                throw;
+            }
 
             return locationResonse;
         }        
