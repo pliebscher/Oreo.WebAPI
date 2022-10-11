@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace Oreo.WebAPI.OpenWeather.Models
 {
     public class WeatherResponse
     {
-        public List[] List { get; set; }
+        [JsonProperty("list")]
+        public List[] Forcast { get; set; }
         public City City { get; set; }
     }
 
@@ -37,7 +35,6 @@ namespace Oreo.WebAPI.OpenWeather.Models
         public Wind wind { get; set; }
         public int visibility { get; set; }
         public int pop { get; set; }
-        public Sys sys { get; set; }
         public string dt_txt { get; set; }
     }
 
