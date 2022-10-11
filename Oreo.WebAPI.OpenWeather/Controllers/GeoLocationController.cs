@@ -26,11 +26,21 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
         }
 
         /// <summary>
-        /// /api/geolocation?city=piedmont&state=ca&country=us
+        /// Returns the geographic (Lat/Lon) location info for a city or cities.
         /// </summary>
+        /// /// <remarks>
+        /// Sample request:
+        /// 
+        ///     GET /api/geolocation?city=piedmont&state=ca&country=us
+        ///     
+        /// </remarks>
         /// <param name="location"></param>
-        /// <returns></returns>
-        [HttpGet]        
+        /// <returns>A list of geo locations matching the City, State and Country search criteria.</returns>
+        /// <response code="200">Succesfull request</response>
+        /// <response code="400">Missing or invalid request data</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public async Task<IEnumerable<GeoLocation>> Get([FromQuery] GeoLocationRequest location)
         {
             GeoLocation[] locationResonse;
