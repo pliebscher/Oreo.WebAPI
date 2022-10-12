@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 using RestSharp;
 using Newtonsoft.Json;
@@ -17,11 +16,12 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
     public class WeatherController : ControllerBase
     {
         private readonly ILogger<WeatherController> _logger;
+        private readonly string _apiKey = "";
 
-        private string _apiKey = "e850980c6457ad9e1f2fc72792dd0eca"; // TODO: Inject
-
-        public WeatherController(ILogger<WeatherController> logger)
+        public WeatherController(IConfiguration config, ILogger<WeatherController> logger)
         {
+            // Add your OpenWeather API key to your local secrets.json file...
+            _apiKey = config["OpenWeather:ApiKey"];
             _logger = logger;
         }
 

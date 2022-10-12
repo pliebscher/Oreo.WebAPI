@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 using RestSharp;
 using Newtonsoft.Json;
@@ -17,11 +17,12 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
     public class GeoLocationController : ControllerBase
     {
         private readonly ILogger<GeoLocationController> _logger;
+        private readonly string _apiKey = "";
 
-        private string _apiKey = "e850980c6457ad9e1f2fc72792dd0eca"; // TODO: Inject
-
-        public GeoLocationController(ILogger<GeoLocationController> logger)
+        public GeoLocationController(IConfiguration config, ILogger<GeoLocationController> logger)
         {
+            // Add your OpenWeather API key to your local secrets.json file...
+            _apiKey = config["OpenWeather:ApiKey"];
             _logger = logger;
         }
 
