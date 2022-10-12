@@ -37,7 +37,7 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
         [ProducesResponseType(400)]
         public async Task<WeatherResponse> Get([FromQuery] WeatherRequest weatherRequest)
         {
-            WeatherResponse weatherResponse = null;
+            WeatherResponse weatherResponse;
 
             try
             {

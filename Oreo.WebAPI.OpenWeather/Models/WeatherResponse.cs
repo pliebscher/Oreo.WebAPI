@@ -5,18 +5,25 @@ namespace Oreo.WebAPI.OpenWeather.Models
     public class WeatherResponse
     {
         [JsonProperty("list")]
-        public List[] Forcast { get; set; }
+        public Forecast[] Forecast { get; set; }
+        
         public City City { get; set; }
     }
 
     public class City
     {
         public string Name { get; set; }
+        
         public Coord Coord { get; set; }
+        
         public string Country { get; set; }
+        
         public int Population { get; set; }
+        
         public int Timezone { get; set; }
+        
         public int Sunrise { get; set; }
+        
         public int Sunset { get; set; }
     }
 
@@ -26,21 +33,28 @@ namespace Oreo.WebAPI.OpenWeather.Models
         public float Lon { get; set; }
     }
 
-    public class List
+    public class Forecast
     {
-        public int dt { get; set; }
-        public Main main { get; set; }
-        public Weather[] weather { get; set; }
-        public Clouds clouds { get; set; }
-        public Wind wind { get; set; }
-        public int visibility { get; set; }
-        public int pop { get; set; }
-        public string dt_txt { get; set; }
+        [JsonProperty("dt")]
+        public int UnixEpochTime { get; set; }
+        
+        public Main Main { get; set; }
+        
+        public Weather[] Weather { get; set; }
+        
+        //public Clouds Clouds { get; set; }
+        
+        public Wind Wind { get; set; }
+        
+        public int Visibility { get; set; }
+        
+        [JsonProperty("dt_txt")]
+        public string LocalDateTime { get; set; }
     }
 
     public class Main
     {
-        public float temp { get; set; }
+        public float Temp { get; set; }
         public float feels_like { get; set; }
         public float temp_min { get; set; }
         public float temp_max { get; set; }
@@ -58,21 +72,20 @@ namespace Oreo.WebAPI.OpenWeather.Models
 
     public class Wind
     {
-        public float speed { get; set; }
-        public int deg { get; set; }
-        public float gust { get; set; }
-    }
+        public float Speed { get; set; }
 
-    public class Sys
-    {
-        public string pod { get; set; }
+        public int Deg { get; set; }
+
+        public float Gust { get; set; }
     }
 
     public class Weather
     {
-        public int id { get; set; }
-        public string main { get; set; }
-        public string description { get; set; }
-        public string icon { get; set; }
+        [JsonProperty("main")]
+        public string Summary { get; set; }
+
+        public string Description { get; set; }
+
+        public string Icon { get; set; }
     }
 }
