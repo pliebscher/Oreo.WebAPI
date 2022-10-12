@@ -39,7 +39,7 @@ namespace Oreo.WebAPI.OpenWeather
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers();                
             });
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -49,8 +49,11 @@ namespace Oreo.WebAPI.OpenWeather
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Weather API v1");
+                options.RoutePrefix = ""; // Set Swagger UI as default page
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Weather API v1");                
             });
+
+            
         }
     }
 }
