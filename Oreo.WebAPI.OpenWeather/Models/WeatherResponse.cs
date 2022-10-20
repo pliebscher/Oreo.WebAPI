@@ -55,13 +55,24 @@ namespace Oreo.WebAPI.OpenWeather.Models
     public class Main
     {
         public float Temp { get; set; }
-        public float feels_like { get; set; }
-        public float temp_min { get; set; }
-        public float temp_max { get; set; }
-        public int pressure { get; set; }
-        public int sea_level { get; set; }
-        public int grnd_level { get; set; }
-        public int humidity { get; set; }
+
+        [JsonProperty("feels_like")]
+        public float FeelsLike { get; set; }
+
+        [JsonProperty("temp_min")]
+        public float TempMin { get; set; }
+
+        [JsonProperty("temp_max")]
+        public float TempMax { get; set; }
+        
+        public int Pressure { get; set; }
+        
+        //public int sea_level { get; set; }
+        
+        //public int grnd_level { get; set; }
+        
+        public int Humidity { get; set; }
+        
         //public float temp_kf { get; set; }
     }
 
@@ -79,13 +90,26 @@ namespace Oreo.WebAPI.OpenWeather.Models
         public float Gust { get; set; }
     }
 
+    /// <summary>
+    /// https://openweathermap.org/weather-conditions
+    /// </summary>
     public class Weather
     {
+        /// <summary>
+        /// See https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2 for a full list of codes
+        /// </summary>
+        [JsonProperty("id")]
+        public int Code { get; set; }
+
         [JsonProperty("main")]
         public string Summary { get; set; }
 
         public string Description { get; set; }
 
+        /// <summary>
+        /// For code 500 - light rain icon = "10d". See https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2 for a full list of codes
+        /// URL is http://openweathermap.org/img/wn/10d@2x.png
+        /// </summary>
         public string Icon { get; set; }
     }
 }
