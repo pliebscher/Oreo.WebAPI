@@ -26,15 +26,12 @@ namespace Oreo.WebAPI.Utils
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<ForwardedHeadersOptions>(options =>
-            //    {
-            //        options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-            //        options.RequireHeaderSymmetry = false;
-            //        options.ForwardLimit = null;
-            //        //options.KnownProxies.Add(IPAddress.Parse("172.20.10.3"));
-            //        options.KnownNetworks.Add(new IPNetwork(IPAddress.Parse("10.92.0.0"), 24));
-            //    }
-            //);
+            services.AddCors(options => options.AddPolicy("Default", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddControllers();
         }
@@ -47,13 +44,7 @@ namespace Oreo.WebAPI.Utils
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseForwardedHeaders(new ForwardedHeadersOptions
-            //    {
-            //        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            //    }
-            //);
-
-            //app.UseForwardedHeaders();
+            app.UseCors("Default");
 
             app.UseRouting();
 
