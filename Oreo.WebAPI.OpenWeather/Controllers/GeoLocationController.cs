@@ -49,7 +49,7 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
             try
             {
                 RestClient client = new RestClient("http://api.openweathermap.org/geo/1.0/direct");
-                RestRequest request = new RestRequest($"?q={location.City},{location.State},{location.Country}&appid={_apiKey}");
+                RestRequest request = new RestRequest($"?q={location.City},{location.State},{location.Country}&limit=5&appid={_apiKey}");
 
                 RestResponse response = await client.GetAsync(request);
                 locationResonse = JsonConvert.DeserializeObject<GeoLocation[]>(response.Content);
