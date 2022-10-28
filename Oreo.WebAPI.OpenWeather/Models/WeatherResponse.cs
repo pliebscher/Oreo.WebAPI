@@ -37,8 +37,9 @@ namespace Oreo.WebAPI.OpenWeather.Models
     {
         [JsonProperty("dt")]
         public int UnixEpochTime { get; set; }
-        
-        public Main Main { get; set; }
+
+        [JsonProperty("main")]
+        public Metrics Metrics { get; set; }
         
         public Weather[] Weather { get; set; }
         
@@ -52,7 +53,7 @@ namespace Oreo.WebAPI.OpenWeather.Models
         public string LocalDateTime { get; set; }
     }
 
-    public class Main
+    public class Metrics
     {
         public float Temp { get; set; }
 
