@@ -42,7 +42,7 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
             try
             {
                 RestClient client = new RestClient("http://api.openweathermap.org/data/2.5/forecast");
-                RestRequest request = new RestRequest($"?lat={weatherRequest.Lat}&lon={weatherRequest.Lon}&units=imperial&cnt=1&appid={_apiKey}");
+                RestRequest request = new RestRequest($"?lat={weatherRequest.Lat}&lon={weatherRequest.Lon}&units=imperial&cnt=5&appid={_apiKey}");
 
                 RestResponse response = await client.GetAsync(request);
                 weatherResponse = JsonConvert.DeserializeObject<WeatherResponse>(response.Content);
