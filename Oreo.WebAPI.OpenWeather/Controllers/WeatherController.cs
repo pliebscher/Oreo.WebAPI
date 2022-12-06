@@ -25,24 +25,22 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
             _logger = logger;
         }
 
-        // http://api.openweathermap.org/data/2.5/forecast?lat=37.82&lon=-122.23&units=imperial&cnt=1&appid=e850980c6457ad9e1f2fc72792dd0eca
-
         /// <summary>
         /// Returns the weather for a given geographical location.
         /// </summary>
         /// <param name="weatherRequest"></param>
-        /// <returns></returns>
-        [HttpGet]
+        /// <returns>WeatherResponse</returns>
+        [HttpGet("/api/waether")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<WeatherResponse> Get([FromQuery] WeatherRequest weatherRequest)
+        public async Task<WeatherResponse> Current([FromQuery] WeatherRequest weatherRequest)
         {
             WeatherResponse weatherResponse;
 
             try
             {
-                RestClient client = new RestClient("http://api.openweathermap.org/data/2.5/forecast");
-                RestRequest request = new RestRequest($"?lat={weatherRequest.Lat}&lon={weatherRequest.Lon}&units=imperial&cnt=5&appid={_apiKey}");
+                RestClient client = new RestClient("http://api.openweathermap.org/data/2.5/weather");
+                RestRequest request = new RestRequest($"?lat={weatherRequest.Lat}&lon={weatherRequest.Lon}&units=imperial&appid={_apiKey}");
 
                 RestResponse response = await client.GetAsync(request);
                 weatherResponse = JsonConvert.DeserializeObject<WeatherResponse>(response.Content);
@@ -54,6 +52,37 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
             }
 
             return weatherResponse;
+        }
+
+        // http://api.openweathermap.org/data/2.5/forecast?lat=37.82&lon=-122.23&units=imperial&cnt=1&appid=e850980c6457ad9e1f2fc72792dd0eca
+
+        /// <summary>
+        /// Returns the forecast for a given geographical location.
+        /// </summary>
+        /// <param name="weatherRequest"></param>
+        /// <returns>ForecastResponse</returns>
+        [HttpGet("/api/forecast")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ForecastResponse> Forecast([FromQuery] WeatherRequest weatherRequest)
+        {
+            ForecastResponse forecastResponse;
+
+            try
+            {
+                RestClient client = new RestClient("http://api.openweathermap.org/data/2.5/forecast");
+                RestRequest request = new RestRequest($"?lat={weatherRequest.Lat}&lon={weatherRequest.Lon}&units=imperial&cnt=5&appid={_apiKey}");
+
+                RestResponse response = await client.GetAsync(request);
+                forecastResponse = JsonConvert.DeserializeObject<ForecastResponse>(response.Content);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error getting forecast.");
+                throw;
+            }
+
+            return forecastResponse;
         }
     }
 }
