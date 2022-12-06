@@ -13,5 +13,8 @@ namespace Oreo.WebAPI.OpenWeather.Models
 
         [JsonProperty("main")]
         public Metrics Metrics { get; set; }
+
+        [JsonProperty("name")]
+        public string City { get; set; }
     }
 }
