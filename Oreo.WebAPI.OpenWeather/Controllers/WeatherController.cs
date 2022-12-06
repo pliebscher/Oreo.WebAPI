@@ -30,7 +30,7 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
         /// </summary>
         /// <param name="weatherRequest"></param>
         /// <returns>WeatherResponse</returns>
-        [HttpGet("/api/waether")]
+        [HttpGet("/api/Weather")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<WeatherResponse> Current([FromQuery] WeatherRequest weatherRequest)
@@ -61,7 +61,7 @@ namespace Oreo.WebAPI.OpenWeather.Controllers
         /// </summary>
         /// <param name="weatherRequest"></param>
         /// <returns>ForecastResponse</returns>
-        [HttpGet("/api/forecast")]
+        [HttpGet("/api/Forecast")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<ForecastResponse> Forecast([FromQuery] WeatherRequest weatherRequest)
